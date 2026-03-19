@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  deploy-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Display deployment info
+        run: |
+          echo "🚀 Deploying to environment"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "Environment: PRODUCTION"
+            echo "Frontend: Vercel auto-deploys"
+            echo "Backend: Railway auto-deploys"
+          else
+            echo "Environment: STAGING"
+            echo "Frontend: Vercel auto-deploys"
+            echo "Backend: Railway auto-deploys"
+          fi
+      
+      - name: Run tests (placeholder)
+        run: |
+          echo "✅ Tests would run here"
+          echo "TODO: Add npm test when ready"
+      
+      - name: Deployment complete
+        run: |
+          echo "✅ Deployment triggered successfully"
+          echo "Vercel and Railway will handle the actual deployment"
